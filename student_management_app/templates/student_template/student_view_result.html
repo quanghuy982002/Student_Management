@@ -1,0 +1,62 @@
+{% extends 'student_template/base_template.html' %}
+
+{% block page_title %} Kết quả học tập {% endblock page_title %}
+
+{% block main_content %}
+{% load static %}
+<section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Kết quả</h3>
+                        </div>
+
+                        <div class="card-body">
+                           <div class="table-responsive">
+                                <table class="table">
+                                    <thead class="thead-light">
+                                    <tr>
+                                        <th>#ID</th>
+                                        <th>Môn học</th>
+                                        <th>Điểm chuyên cần</th>
+                                        <th>Điểm giữa kì</th>
+                                        <th>Điểm cuối kì</th>
+                                        <th>Điểm Trung bình</th>
+                                        <th>Xét</th>
+                                    </tr>
+                                    </thead>
+
+                                    {% for row in student_result %}
+                                    <tr>
+                                        <td>{{ row.id }}</td>
+                                        <td>{{ row.subject_id.subject_name }}</td>
+                                        <td>{{ row.subject_attend_marks }}</td>
+                                        <td>{{ row.subject_assignment_marks }}</td>
+                                        <td>{{ row.subject_exam_marks }}</td>
+                                        <td>
+                                            {% if row.subject_exam_marks >= 4 %}
+                                                <span class="alert alert-success">Đạt</span>
+                                            {% else %}
+                                                <span class="alert alert-danger">Trượt</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /.container-fluid -->
+      </section>
+
+{% endblock main_content %}
+
+{% block custom_js %}
+
+{% endblock custom_js %}
